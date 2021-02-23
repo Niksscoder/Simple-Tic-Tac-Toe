@@ -3,14 +3,28 @@ board = [' ' for x in range(10)]
 
 
 def insert_letter(letter, position):
+    """
+    insert  X or O in free position in board
+    :param letter: x or O
+    :param position:  form 1 to 9
+    :return: None
+    """
     board[position] = letter
 
 
 def space_is_free(position):
+    """
+    This function checks Is this position is empty or not ?
+    :param position: from 1 to 9
+    :return: position
+    """
     return board[position] == ' '
 
 
 def print_board(board):
+    """
+    Just draw board of game
+    """
     print('   |    |')
     print(' ' + board[1] + ' | ' + board[2] + '  | ' + board[3])
     print('   |    |')
@@ -25,7 +39,12 @@ def print_board(board):
 
 
 def is_winner(bo, le):
-    return
+    """
+    :param bo:
+    :param le:
+    :return:
+    """
+    pass
 
 
 def player_move():
@@ -41,6 +60,7 @@ def select_random(board):
 
 
 def is_bord_full(board):
+
     pass
 
 
