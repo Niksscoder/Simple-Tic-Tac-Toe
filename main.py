@@ -98,11 +98,43 @@ def player_move():
 
 
 def comp_move():
-    pass
+    possible_moves = [x for x, letter in enumerate(board) if letter == ' ' and x != 0]
+    move = 0
+
+    for let in ['O', 'X']:
+        for i in possible_moves:
+            boord_copy = board[:]
+            boord_copy[i] = let
+            if is_winner(boord_copy, let):
+                move = i
+                return move
+
+    cornersOpen = []
+    for i in possible_moves:
+        if i in [1, 3, 7, 9]:
+            cornersOpen.append(i)
+    if len(cornersOpen) > 0:
+        move = select_random(cornersOpen)
+        return move
+
+    if 5 in possible_moves:
+        move = 5
+        return move
+
+    edgesOpen = []
+    for i in possible_moves:
+        if i in [2, 4, 6, 8]:
+            edgesOpen.append(i)
+    if len(edgesOpen) > 0:
+        move = select_random(edgesOpen)
+        return move
 
 
-def select_random(board):
-    pass
+def select_random(li):
+    import random
+    ln = len(li)
+    r = random.randrange(0, ln)
+    return li[r]
 
 
 def is_bord_full(board):
@@ -111,9 +143,9 @@ def is_bord_full(board):
     :return: True if have have empty position
     """
     if board.count(' ') > 1:
-        return True
-    else:
         return False
+    else:
+        return True
 
 
 def main():
@@ -130,10 +162,15 @@ def main():
 
         # for winning of X (here is playing a computer )
         if not is_winner(board, 'X'):
-            comp_move()
-            print_board(board)
+            move = comp_move()
+            if move == 0:
+                print("Tie game")
+            else:
+                insert_letter('O', move)
+                print("computer placed an \'O\' in position ", move)
+                print_board(board)
         else:
-            print("X\'s won this time !")
+            print('X\'s won this time !')
             break
 
     if is_bord_full(board):
